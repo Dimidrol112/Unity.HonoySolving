@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
+    public GameObject donePanel;
     public InputField sizeIf;
     public GameObject cam;
     public GameObject prefab;
@@ -26,8 +27,15 @@ public class GameManager : MonoBehaviour
     public void Solve()
     {
         PrepScene();
-        StartCoroutine(MoveStack(count, 0, 2));
+        StartCoroutine(SolveHonoy());
     }
+
+    public IEnumerator SolveHonoy()
+    {
+        yield return MoveStack(count, 0, 2);
+        donePanel.SetActive(true);
+    }
+
     public void PrepScene()
     {
         count = int.Parse(sizeIf.text);
